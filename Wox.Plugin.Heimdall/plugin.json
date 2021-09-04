@@ -1,0 +1,12 @@
+{
+  "ID": "8de4fc5e083840e29e2df65ba0c3253d",
+  "ActionKeyword": "dall",
+  "Name": "Heimdall",
+  "Description": "Wox Heimdall integration",
+  "Author": "Subtixx",
+  "Version": "1.0.0",
+  "Language": "csharp",
+  "Website": "http://subtixx.de",
+  "IcoPath": "Images\\icon.png",
+  "ExecuteFileName": "Wox.Plugin.Heimdall.dll"
+}

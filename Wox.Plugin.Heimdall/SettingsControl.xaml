@@ -1,0 +1,50 @@
+<UserControl x:Class="Wox.Plugin.Heimdall.SettingsControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:heimdall="clr-namespace:Wox.Plugin.Heimdall"
+             mc:Ignorable="d"
+             Background="White"
+             d:DataContext="{d:DesignInstance heimdall:SettingsViewModel}"
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition />
+            <RowDefinition Height="35" />
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0" HorizontalAlignment="Left" Margin="0,3,0,3" Width="480">
+            <Label Content="Set browser from path:" Height="28" Margin="0,0,350,0" HorizontalAlignment="Left" Width="130"/>
+            <TextBox x:Name="browserPathBox" Height="21" Margin="138,-25,78,0" TextWrapping="NoWrap" AcceptsReturn="False" VerticalAlignment="Top" RenderTransformOrigin="0.502,-1.668"/>
+            <Button x:Name="viewButton" Margin="0,-30,10,0" Height="25" Click="OnChooseClick" FontSize="10" Content="Choose" HorizontalAlignment="Right" Width="58" />
+        </StackPanel>
+        <StackPanel Grid.Row="1" HorizontalAlignment="Left" Margin="0,3,0,3" Width="480">
+            <Label Content="Heimdall URL:" Height="28" Margin="0,0,350,0" HorizontalAlignment="Left" Width="130"/>
+            <TextBox x:Name="heimdallUrlBox" Text="{Binding Settings.HeimdallUrl}" Height="21" Margin="138,-25,10,0" TextWrapping="NoWrap" AcceptsReturn="False" VerticalAlignment="Top" RenderTransformOrigin="0.502,-1.668"/>
+        </StackPanel>
+        <ListView ItemsSource="{Binding Settings.HeimdallApps}"
+                  Grid.Row="2">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="200">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Url" Width="250">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Link}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Grid.Row="3" HorizontalAlignment="Center" Width="100" Height="25" VerticalAlignment="Center" Click="OnSaveClick">Save</Button>
+    </Grid>
+</UserControl>
