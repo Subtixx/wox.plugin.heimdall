@@ -1,4 +1,4 @@
-name: Build Web App
+name: Build
  
 on: [push]
  
@@ -20,5 +20,18 @@ jobs:
     - name: Restore NuGet Packages
       run: nuget restore Wox.Plugin.Heimdall.sln
  
-    - name: Build and Publish Web App
-      run: msbuild Wox.Plugin.Heimdall.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+    - name: Build Wox Plugin
+      run: msbuild Wox.Plugin.Heimdall.sln /p:Configuration=Release
+    
+    - name: Create Wox Plugin file
+      uses: papeloto/action-zip@v1
+      with:
+        recursive: true
+        files: Wox.Plugin.Heimdall\bin\Release\
+        dest: Wox.Plugin.Heimdall.wox
+      
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: published_wox
+        path: ${{ github.workspace }}/Wox.Plugin.Heimdall.wox
