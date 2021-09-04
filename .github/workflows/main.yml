@@ -1,0 +1,24 @@
+name: Build Web App
+ 
+on: [push]
+ 
+jobs:
+  build:
+ 
+    runs-on: windows-latest
+ 
+    steps:     
+    - name: Setup MSBuild Path
+      uses: microsoft/setup-msbuild@v1.0.3
+       
+    - name: Setup NuGet
+      uses: nuget/setup-nuget@v1     
+
+    - uses: actions/checkout@v1
+      name: Checkout Code
+     
+    - name: Restore NuGet Packages
+      run: nuget restore Wox.Plugin.Heimdall.sln
+ 
+    - name: Build and Publish Web App
+      run: msbuild Wox.Plugin.Heimdall.sln /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
